@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+                <head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width = device-width, initial-scale=1.0">
+<title> Servidor Web </title>
+
+
+<style>
+body{
+    background-color: darkblue;
+    text-align: center;
+    
+#alinhar{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin: 30px;
+    }
+    
+    .titulo{
+        background: lightgray;
+        border: 4px solid white;
+        font-size: 340%;
+        font-color: white;
+        }
+    
+    #elemento{
+        font-size: 240%;
+        font-color: black;
+        }
+
+    .quadro{
+        width: fit-content;
+        padding: 6px;
+        margin: auto;
+        border: 2px solid black;
+        background: lightgray;
+        }
+    
+    #valor{
+        font-size: 140%;
+        font-color: darkblue;
+        }
+  
+    .caixa{
+        width: fit-content;
+        border: 8px solid green;
+        background: lightgreen;
+        padding: 25px;
+    }
+}
+</style>
+                </head>
+
+
+<body>
+<h1 class="titulo">Servidor Climático DSM</h1>
+<br>
+    <div id="alinhar">
+  <script>
+    function sensor_gas() {
+    fetch('/gas')
+    .then(response=>response.text())
+    .then(gas => {
+        document.getElementById('gas').innerText = gas;
+    })
+.catch(err => console.error('Erro ao buscar gases:', err));
+}
+setInterval(sensor_gas, 10000);
+  </script>
+<div class="caixa">
+<h1 id="elemento">Presença de Gás:</h1>
+<p id="gas" class="quadro">add valor aqui</p>
+</div>
+
+  <script>
+  function sensor_temp() {
+    fetch('/temp')
+    .then(response=>response.text())
+    .then(temp => {
+        document.getElementById('temp').innerText = temp;
+    })
+.catch(err => console.error('Erro ao buscar temperatura:', err));
+}
+setInterval(sensor_temp, 10000);
+  </script>
+<div class="caixa">
+<h1 id="elemento">Temperatura:</h1>
+<p id="temp" class="quadro"></p>
+</div>
+
+  <script>
+  function led() {
+    fetch('/luz')
+    .then(response=>response.text())
+    .then(dados => {
+        document.getElementById('led').innerText = luz;
+    })
+.catch(err => console.error('Erro ao ligar luz:', err));
+}
+setInterval(led, 10000);
+  </script>
+<div class="caixa">
+<h1 id="elemento">Estado do Led:</h1>
+<p id="led" class="quadro"></p>
+</div>
+        </div>
+                </body>
+
+
+                </html>
